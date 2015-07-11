@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Webmo</name>
+    </assembly>
+    <members>
+        <member name="M:Webmo.Controllers.APIController.Index">
+            <summary>
+            The summary listing of all the API functions
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
