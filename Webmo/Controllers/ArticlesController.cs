@@ -8,6 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using Webmo;
 using Webmo.Models;
+using System.Xml;
+using System.IO;
+using System.Text;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Webmo.Controllers
 {
@@ -18,18 +23,12 @@ namespace Webmo.Controllers
         // GET: Articles
         public ActionResult Index(int? id)
         {
+            return View(db.Articles.ToList());
+        }
 
-            
-            if (id == null)
-            {
-                return View(db.Articles.ToList());
-            }
-            Article article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            return View(article);
+        public JsonResult GetList()
+        {
+            return Json(db.Articles.ToList(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Articles/Details/5
@@ -44,6 +43,11 @@ namespace Webmo.Controllers
             {
                 return HttpNotFound();
             }
+            if (Request.IsAjaxRequest())
+            {
+                return Json(article, JsonRequestBehavior.AllowGet);
+            }
+
             return View(article);
         }
 
@@ -58,7 +62,7 @@ namespace Webmo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Posted,Updatd,Title,Content")] Article article)
+        public ActionResult Create(/*[Bind(Include = "ID,Posted,Updatd,Title,Content")]*/ Article article)
         {
             if (ModelState.IsValid)
             {

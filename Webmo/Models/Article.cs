@@ -11,7 +11,7 @@ namespace Webmo.Models
     public class Article
     {
         public int ID { get; set; }
-        public DateTime Posted { get; set; }
+        public DateTime? Posted { get; set; }
         public DateTime? Updatd { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

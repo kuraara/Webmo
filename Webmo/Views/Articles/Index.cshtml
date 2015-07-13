@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 
 <h2>Index</h2>
 
@@ -15,7 +16,7 @@
     <div>
         <h3>@Html.DisplayFor(m => item.Title)  </h3>
         <p>
-            @Html.DisplayFor(m => item.Content).ToString().Substring(0, 60)
+            @Html.DisplayFor(m => item.Content).ToString()
             ...
             @Html.ActionLink("[keep reading]", "Details", new { id = item.ID })
         </p>
@@ -25,4 +26,35 @@
         @Html.ActionLink("Delete", "Delete", new { id = item.ID })
     </div>
 }
+
+<script type="text/javascript">
+
+    var url = '/Articles';
+    console.log(url);
+    $(function () {
+
+        $.ajax({
+            type: "GET",
+            url: "/Articles/GetList",
+            data: {},
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (jqHXR, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+
+
+        //$.get(url, null, function (e) {
+        //    console.log("Callback");
+        //    var d = $.parseJSON(e);
+        //    console.log(e);
+        //    
+        //});
+
+    });
+
+</script>
+
 
