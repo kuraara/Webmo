@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webmo", "Webmo\Webmo.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webmo.Tests", "Webmo.Tests\Webmo.Tests.csproj", "{AE7EFF54-25E2-48FD-94C7-FF8B3BCC1922}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Webmo.Data", "Webmo.Data\Webmo.Data.csproj", "{543EC710-B520-4B3D-A868-87EB1093F406}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AE7EFF54-25E2-48FD-94C7-FF8B3BCC1922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE7EFF54-25E2-48FD-94C7-FF8B3BCC1922}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE7EFF54-25E2-48FD-94C7-FF8B3BCC1922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{543EC710-B520-4B3D-A868-87EB1093F406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543EC710-B520-4B3D-A868-87EB1093F406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543EC710-B520-4B3D-A868-87EB1093F406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543EC710-B520-4B3D-A868-87EB1093F406}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

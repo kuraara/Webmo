@@ -75,3 +75,5 @@ C:\Users\Kuraara\Documents\Visual Studio 2013\Projects\Webmo\Webmo\bin\MarkdownS
 C:\Users\Kuraara\Documents\Visual Studio 2013\Projects\Webmo\Webmo\bin\MarkdownSharp.pdb
 C:\Users\Kuraara\Documents\Visual Studio 2013\Projects\Webmo\Webmo\bin\MarkdownSharp.xml
 C:\Users\Kuraara\Documents\Visual Studio 2013\Projects\Webmo\Webmo\obj\Debug\Webmo.Migrations.ModifiedField.resources
+C:\Users\Kuraara\documents\visual studio 2013\Projects\Webmo\Webmo\bin\Webmo.Data.dll
+C:\Users\Kuraara\documents\visual studio 2013\Projects\Webmo\Webmo\bin\Webmo.Data.pdb

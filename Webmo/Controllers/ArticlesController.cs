@@ -6,29 +6,31 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Webmo;
-using Webmo.Models;
+using Webmo.Data.DAL;
+using Webmo.Data.Repositories;
+using Webmo.Data.Models;
 using System.Xml;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
+
 namespace Webmo.Controllers
 {
     public class ArticlesController : Controller
     {
-        private WebmoContext db = new WebmoContext();
+        private IArticleRepository repo = new ArticleRepository(new Data.DAL.WebmoContext());
 
         // GET: Articles
         public ActionResult Index(int? id)
         {
-            return View(db.Articles.ToList());
+            return View(repo.GetAll());
         }
 
         public JsonResult GetList()
         {
-            return Json(db.Articles.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(repo.GetAll(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Articles/Details/5
@@ -38,7 +40,7 @@ namespace Webmo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
+            Article article = repo.Find(id.Value);
             if (article == null)
             {
                 return HttpNotFound();
@@ -66,8 +68,8 @@ namespace Webmo.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Articles.Add(article);
-                db.SaveChanges();
+                repo.Insert(article);
+                repo.Save();
                 return RedirectToAction("Index");
             }
 
@@ -81,7 +83,7 @@ namespace Webmo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
+            Article article = repo.Find(id.Value);
             if (article == null)
             {
                 return HttpNotFound();
@@ -96,13 +98,33 @@ namespace Webmo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Posted,Updatd,Title,Content")] Article article)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(article).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    repo.Edit(article);
+                    repo.Save();
+
+                    if(Request.IsAjaxRequest())
+                    {
+                        var a = repo.Find(article.ID);
+                        return Json(a);
+                    }
+
+                    return RedirectToAction("Index");
+                }
             }
-            return View(article);
+            catch(Exception e)
+            {
+                Response.StatusCode = 400;
+                if(Request.IsAjaxRequest())
+                {
+                    return Json(new{Status = 400, Success=false});
+                }
+                return RedirectToAction("Error", new {from = "edit"});
+            }
+
+            return RedirectToAction("Index");
         }
 
         // GET: Articles/Delete/5
@@ -112,7 +134,7 @@ namespace Webmo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
+            Article article = repo.Find(id.Value);
             if (article == null)
             {
                 return HttpNotFound();
@@ -125,19 +147,17 @@ namespace Webmo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Article article = db.Articles.Find(id);
-            db.Articles.Remove(article);
-            db.SaveChanges();
+            Article article = repo.Find(id);
+            repo.Remove(article);
+            repo.Save();
+
+            if(Request.IsAjaxRequest())
+            {
+                return Json(article);
+            }
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
     }
 }

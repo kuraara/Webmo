@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
-using Webmo.Models;
+using Webmo.Data.Models;
 using MarkdownSharp;
 
 namespace Webmo.Extensions
