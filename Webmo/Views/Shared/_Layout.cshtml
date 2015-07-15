@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
-<body>
+<body style="background-color: #1A1A1A;">
     <!--
     <div class="topnav">TopBar</div>
     <div class="sidebar">SideBar</div>
@@ -38,11 +38,12 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            
-        </footer>
+        <div class="row">
+            <!-- Body Content -->
+            <div class="col-md-12 content-area">
+                @RenderBody()
+            </div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

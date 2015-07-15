@@ -1,36 +1,72 @@
 ﻿@model IEnumerable<Webmo.Data.Models.Article>
+@using Webmo.Extensions
 
 @{
     ViewBag.Title = "Index";
 }
 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-@foreach (var item in Model)
-{
-    <div>
-        <h3>@Html.DisplayFor(m => item.Title)  </h3>
-        <p>
-            @Html.DisplayFor(m => item.Content).ToString()
-            ...
-            @Html.ActionLink("[keep reading]", "Details", new { id = item.ID })
-        </p>
-
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            @Html.ActionLink("Create New", "Create")
+        </div>
     </div>
-}
+
+    @foreach (var item in Model)
+    {
+        <div class="row article">
+            <div class="row article-title">
+
+                <div class="title-text">
+                    @item.Title
+                </div>
+                <div class="mh">
+                    <div class="dropdown">
+                        <a class="ddRoot"><i class="fa fa-edit"></i></a>
+                        <div class="menu" id="stsMenu">
+                            <ul>
+                                @Html.RawActionLink("<li class=\"menuItem\"><i class=\"fa fa-edit\"></i></li>", "Edit", "Article", new { id = item.ID }, null)
+                                @Html.RawActionLink("<li class=\"menuItem\"><i class=\"fa-info-circle\"></i>  Detail;s</li>", "Details", "Article", new { id = item.ID }, null)
+                                @Html.RawActionLink("<li class=\"menuItem\"><i class=\"fa-trash-o\"></i>  Delete</li>", "Delete", "Article", new { id = item.ID }, null)
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row article-body">
+                @item.ProcessMarkDown()
+            </div>
+        </div>
+    }
+</div>
 
 <script type="text/javascript">
 
     var url = '/Articles';
     console.log(url);
+
+    function registerDropdownMenu() {
+
+        $(".ddRoot").on("click", function () {
+            var m = $(this).parent(".dropdown").children(".menu");
+            $(m).show(100);
+        });
+
+        $(document).on("mouseup", function () {
+            $(".menu").hide(100);
+        })
+
+        $(".menu").on("mouseleave", function () {
+            $(".menu").hide(100);
+        });
+    }
+
+
+
     $(function () {
 
         $.ajax({
@@ -45,16 +81,8 @@
             }
         });
 
-
-        //$.get(url, null, function (e) {
-        //    console.log("Callback");
-        //    var d = $.parseJSON(e);
-        //    console.log(e);
-        //    
-        //});
+        registerDropdownMenu();
 
     });
 
 </script>
-
-
