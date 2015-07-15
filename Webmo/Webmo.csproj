@@ -140,17 +140,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201507091025423_AddedArticles.cs" />
-    <Compile Include="Migrations\201507091025423_AddedArticles.Designer.cs">
-      <DependentUpon>201507091025423_AddedArticles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201507130803356_ModifiedField.cs" />
-    <Compile Include="Migrations\201507130803356_ModifiedField.Designer.cs">
-      <DependentUpon>201507130803356_ModifiedField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Article.cs" />
-    <Compile Include="Models\Comment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebmoContext.cs" />
   </ItemGroup>
@@ -171,7 +160,6 @@
     <Content Include="Scripts\handlebars.runtime.amd.min.js" />
     <Content Include="Scripts\handlebars.runtime.js" />
     <Content Include="Scripts\handlebars.runtime.min.js" />
-    <Content Include="Webmo.XML" />
     <Content Include="App_Readme\Handlebarsjs_README.md" />
     <Content Include="App_Readme\Handlebarsjs_LICENSE" />
     <None Include="Properties\PublishProfiles\webmo.pubxml" />
@@ -218,14 +206,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201507091025423_AddedArticles.resx">
-      <DependentUpon>201507091025423_AddedArticles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201507130803356_ModifiedField.resx">
-      <DependentUpon>201507130803356_ModifiedField.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Webmo.Data\Webmo.Data.csproj">
